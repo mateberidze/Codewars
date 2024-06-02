@@ -13,13 +13,11 @@ function repeats(arr){
 
 //Triangular Treasure
 function triangular(n) {
-    let sum = 0;
-    for (let i = 1; i <= n; i++){
-      sum += i * 1
-      }
-    return sum;
-  }
-  
+    if (n <= 0) {
+        return 0;
+    }
+    return n * (n + 1) / 2;
+}
 //Find the Mine!
 function mineLocation(f){
     let p = 0;
@@ -56,47 +54,33 @@ function digPow(n, p){
 
 
 //Backwards Read Primes
-  function backwardsPrime(start, stop){
-    var arr = []
-    for (var x = start; x <= stop; x++);
-    if(isPrime(x)) {
-      if (arr.includes(x)){
-        
-      }
-      let temp = parseInt(
-        x
-           
-            .toSring()
-            .split("")
-            .reverse()
-            .join("")
-      );
-      
-      if (temp != x && isPrime(temp)) {
-        arr.push(x);
-        arr.push(temp);
-      }
-    }
-   return arr.filter(a => a => start && a <= stop).sort((b, c) => b - c);
-  }
-  
-  function isPrime(n){
-    if (n == 2 || n == 3){
-      return true;
-    }
-   if (n % 2 == 0 || n % 3 == 0 || n < 2){
-     return false;
-   } 
-    var x = 5;
-    var N = math.sqrt(n);
-    while (x <= N){
-      if (n % 2) {
-        return false;
-      }
-      x++
+function isPrime(n) {
+    if (n <= 1) return false;
+    if (n <= 3) return true;
+    if (n % 2 === 0 || n % 3 === 0) return false;
+    for (let i = 5; i * i <= n; i += 6) {
+        if (n % i === 0 || n % (i + 2) === 0) return false;
     }
     return true;
-  }
+}
+
+function reverseNumber(n) {
+    return parseInt(n.toString().split('').reverse().join(''));
+}
+
+function backwardsPrime(start, end) {
+    const result = [];
+    for (let num = start; num <= end; num++) {
+        if (isPrime(num)) {
+            const reversedNum = reverseNumber(num);
+            if (num !== reversedNum && isPrime(reversedNum)) {
+                result.push(num);
+            }
+        }
+    }
+    return result;
+}
+
 
 //cat years, dog years
 const humanYearsCatYearsDogYears = humanYears => [
