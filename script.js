@@ -108,16 +108,23 @@ const humanYearsCatYearsDogYears = humanYears => [
 
 
 //rot13
-  function rot13(str) {
-    let s1 = "abcdefghijklmnopqrstuvwxyz"
-    let s2 = "NOPQRSTUVWXZBCDEFGHI".toLowerCase();
-    const replaced = str.replace(/[a-z]/gi, v =>{
-      let upper = v === v.toUpperCase();
-      return upper
-      ? s2[s1.indexOf(v.toLowerCase())].toUpperCase()
-      : s2[s1.inexOf(v.toLowerCase())].to.LowerCase();
-    });
-    return replaced;
+function rot13(str) {
+    return str.split('').map(char => {
+      if (char >= 'a' && char <= 'z') {
+       
+        return String.fromCharCode((char.charCodeAt(0) - 'a'.charCodeAt(0) + 13) % 26 + 'a'.charCodeAt(0));
+      } else if (char >= 'A' && char <= 'Z') {
+      
+        return String.fromCharCode((char.charCodeAt(0) - 'A'.charCodeAt(0) + 13) % 26 + 'A'.charCodeAt(0));
+      } else {
+    
+        return char;
+      }
+    }).join('');
   }
-
+  
+  
+  const inputText = "Hello, World! 123";
+  const outputText = rot13(inputText);
+  console.log(outputText); 
 
